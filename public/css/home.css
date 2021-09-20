@@ -1,0 +1,68 @@
+  /* Base : */
+  @import './base/reset.css'; /* margin, padding : 0; etc. */
+  @import './base/variables.css'; /* :root{} */
+  
+  /* 3rd-parties (a.k.a vendors) : */
+  /* @import './vendors/pico/css/pico.min.css'; */
+  /* or */
+/*   @import './vendors/w3-css/w3.min.css'; */
+  
+  /* Components : */
+  @import './components/form.css';
+    
+  /* |- CUSTOME STYLE OPEN : */
+  
+  
+  .grid-wrapper {
+    display: grid;
+    width: var(--fluid-container-width);
+    min-height: 100vh;
+    background-color: rgb(5, 181, 235);
+  }
+  
+  .grid-wrapper > section {
+    display: inherit; /* grid */
+    justify-items: center;
+    width: inherit;
+    min-height: 50vh;
+    border: 2px dashed rgb(255, 0, 0);
+  }
+  
+  /* section:first-child {
+    min-height: 100vh;
+  } */
+  
+  section:nth-child(odd) {
+    background-color: #03A9F4;
+  }
+  
+  section:nth-child(even) {
+    background-color: white;
+  }
+  
+  .grid-wrapper article {
+    width: var(--boxed-container-width);
+    /* background-color: rgb(185, 185, 185); */
+    border: 2px dashed rgb(0, 0, 0);
+  }
+  
+  /* |-- Section-1 open */
+  @import './sections/';
+  /* |-- Section-1 close */
+  
+  /* |-- Section-nth open */
+  @import './sections/';
+  /* |-- Section-nth close */
+  
+  /* |- CUSTOME STYLE CLOSE ; */
+  
+  
+  /* |-- Section-1 open */
+  @import './sections/';
+  /* |-- Section-1 close */
+  
+  /* |-- Section-nth open */
+  @import './sections/';
+  /* |-- Section-nth close */
+  
+  /* |- CUSTOME STYLE CLOSE ; */

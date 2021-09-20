@@ -1,0 +1,6 @@
+{
+    "events" : {
+        "restart":"fuser -k 8000/tcp && nodemon server"
+    }
+}
+    
