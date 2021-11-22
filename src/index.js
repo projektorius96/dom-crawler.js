@@ -10,9 +10,18 @@ const express = require('express');
 const app = express();
 const [PORT, PATH] = [8181, '../public/index.html']; // or any other relative PORT, PATH available
 
-// Vendors (3rd parties)
-/* const parser = require('node-html-parser'); // (^this is simplified light-weight alternative for JSDOM) */
+// VENDORS (3rd-parties)
+
+// ~ HTTP-TERMINATOR [by Gajus Kuizinas]
+const {createHttpTerminator} = require('http-terminator');
+const server = app.listen(PORT);
+const httpTerminator = createHttpTerminator({
+  server,
+});
+
+// ~ JSDOM + [optionally] -> node-html-parser
 const JSDOM = require("jsdom").JSDOM;
+/* const parser = require('node-html-parser'); // (^this is simplified light-weight alternative for JSDOM) */
 const options = {
   resources: 'usable', /* run external (sub)resources such as: scripts, frames etc. */
   runScripts: 'dangerously', /* run internal resources within <script></script> tags */
@@ -63,6 +72,9 @@ async function scrapper() {
       await file_handle.close();
     }
 
+    // ~ HTTP-TERMINATOR [CONT'D]
+    await httpTerminator.terminate()
+
     return `Server is running...
     NOTE : you can always terminate static file serving with Ctrl + C (Windows)
     `;
@@ -73,7 +85,6 @@ scrapper()
   .catch(console.error)
   .finally();
 
-app.listen(PORT);
 console.log(
 `
 
@@ -83,4 +94,10 @@ http://localhost:${PORT}
 
 `
 )
+
+/* process.kill(0) */ // if no process - error will be thrown , otherwise process de facto | this time no error [PASSED]
+
+
+// NEXT GOAL : integrate the following for Express.js : @https://github.com/gajus/http-terminator by Gajus
+// BONUS consider this npm : @https://www.npmjs.com/package/livereload
  
