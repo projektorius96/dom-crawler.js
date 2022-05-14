@@ -32,7 +32,7 @@ async function scrapper() {
 
     /* app.use(express.urlencoded({ extended: false })); // # optional herein */
     console.log(path.join(__dirname, '../public'))
-    app.use(express.static(path.join(__dirname, '../public')/* , {index: false} */));
+    app.use(express.static(path.join(__dirname, '../public'), {index: ['index.html'],  dotfiles: 'allow',}));
 
     const dom = await JSDOM.fromFile(PATH, null /* options */); /* console.log("JSDOM reference", dom); */
     /* console.log("HTML content before append: ", dom.serialize()); */ // as if document.body.parentElement on user-agent (browser)
@@ -72,8 +72,8 @@ async function scrapper() {
       await file_handle.close();
     }
 
-    // ~ HTTP-TERMINATOR [CONT'D]
-    await httpTerminator.terminate()
+    // ~ HTTP-TERMINATOR [CONT'D] # can be used optionally :
+    // await httpTerminator.terminate()
 
     return `Server is running...
     NOTE : you can always terminate static file serving with Ctrl + C (Windows)
