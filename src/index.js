@@ -72,13 +72,13 @@ async function scrapper() {
       await file_handle.close();
     }
 
-    // ~ HTTP-TERMINATOR [CONT'D] # can be used optionally :
+    // ~ HTTP-TERMINATOR [CONT'D] # can be used instead of explicit Ctrl + C [optional] :
     // await httpTerminator.terminate()
 
     return `Server is running...
     NOTE : you can always terminate static file serving with Ctrl + C (Windows)
     `;
-   
+
 } 
 scrapper()
   .then(console.log)
@@ -100,4 +100,4 @@ http://localhost:${PORT}
 
 // NEXT GOAL : integrate the following for Express.js : @https://github.com/gajus/http-terminator by Gajus
 // BONUS consider this npm : @https://www.npmjs.com/package/livereload
- 
+
